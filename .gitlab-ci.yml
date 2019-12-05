@@ -1,0 +1,19 @@
+stages:
+  - build
+
+dev_build:
+  stage: build
+  image: docker
+  only:
+    - tags
+  variables:
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
+  services:
+    - docker:dind
+  script:
+    - cp $ENV_FILE ./.env.production
+    - docker build . -f Dockerfile -t $CI_REGISTRY/dewadg/jdih-cms:$CI_COMMIT_REF_NAME
+  after_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+    - docker push $CI_REGISTRY/dewadg/jdih-cms:$CI_COMMIT_REF_NAME
