@@ -3,8 +3,8 @@
     <v-app-bar app clipped-left color="indigo" dark>
       <v-app-bar-nav-icon @click="drawer = !drawer" />
       <span class="title ml-3 mr-5">
-        JDIH&nbsp;
-        <span class="font-weight-light">Bulungan</span>
+        KKN&nbsp;
+        <span class="font-weight-light">Management Sistem</span>
       </span>
 
       <v-spacer />

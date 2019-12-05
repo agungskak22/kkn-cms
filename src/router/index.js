@@ -37,6 +37,11 @@ const routes = [
         path: 'edit-product/:id',
         name: 'edit-product',
         component: () => import(/* webpackChunkName: "about" */ '../views/dashboardContent/product/createProduct.vue')
+      },
+      {
+        path: 'animal-management',
+        name: 'animal-management',
+        component: () => import(/* webpackChunkName: "about" */ '../views/dashboardContent/product/animal-management.vue')
       }
     ]
   },

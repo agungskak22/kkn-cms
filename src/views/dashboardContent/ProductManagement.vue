@@ -20,18 +20,19 @@
       ></v-text-field>
       <v-spacer></v-spacer>
         <v-btn icon>
-          <v-icon v-on='on'>mdi-plus-circle</v-icon>
+          <v-icon
+          v-on='on'
+          @click="$router.push({ name: 'create-product' })"
+          >mdi-plus-circle</v-icon>
         </v-btn>
     </v-toolbar>
-  <v-data-table :search="search" :headers='headers' :items='userData' sort-by='email' class='elevation-1'>
-    <template v-slot:item.status="{ item }">
-      <v-chip :color="getColor(item.status)" dark>{{ item.status }}</v-chip>
-    </template>
+  <v-data-table :search="search" :headers='headers' :items='userData' sort-by='birthplace' class='elevation-1'>
     <template v-slot:top>
     </template>
     <template v-slot:item.action='{ item }'>
       <v-icon small class='mr-2' @click='editItem(item)'>mdi-pen</v-icon>
-      <v-icon small @click='deleteItem(item)'>mdi-delete</v-icon>
+      <v-icon small class='mr-2' @click='deleteItem(item)'>mdi-delete</v-icon>
+      <v-icon small @click='deleteItem(item)'>mdi-eye</v-icon>
     </template>
   </v-data-table>
   </div>
@@ -43,35 +44,24 @@ export default {
     dialog: false,
     search: '',
     headers: [
-      {
-        text: 'Nama',
-        align: 'left',
-        sortable: false,
-        value: 'name'
-      },
-      { text: 'Email', value: 'email' },
-      { text: 'Status', value: 'status' },
-      { text: 'Actions', value: 'action', sortable: false }
+      { text: 'Nama Pemilik', value: 'Name' },
+      { text: 'Tempat lahir', value: 'birthplace' },
+      { text: 'Tanggal Lahir', value: 'birthday' },
+      { text: 'Actions', value: 'action', sortable: false, align: 'center' }
     ],
     userData: [],
     editedIndex: -1,
     editedItem: {
-      name: '',
-      email: '',
-      status: ''
+      Name: '',
+      birthplace: '',
+      birthday: ''
     },
     defaultItem: {
-      name: '',
-      email: '',
-      status: ''
+      Name: '',
+      birthplace: '',
+      birthday: ''
     }
   }),
-
-  computed: {
-    formTitle () {
-      return this.editedIndex === -1 ? 'Data Pengguna baru' : 'Ubah Data Pengguna'
-    }
-  },
 
   watch: {
     dialog (val) {
@@ -87,28 +77,21 @@ export default {
     initialize () {
       this.userData = [
         {
-          name: 'Agung Prio Rismawan',
-          email: 'agungskak22@gmail.com',
-          password: 'password',
-          status: 'aktiv'
+          Name: 'Agung Prio Rismawan',
+          birthplace: 'agungskak22@gmail.com',
+          birthday: '10 Desember 2019'
         },
         {
-          name: 'tomi rafael',
-          email: 'agungskak22@gmail.com',
-          password: 'password',
-          status: 'tidak aktiv'
+          Name: 'tomi rafael',
+          birthplace: 'agungskak22@gmail.com',
+          birthday: '10 Desember 2019'
         },
         {
-          name: 'tomi Bangsat',
-          email: 'agungskak22@gmail.com',
-          password: 'password',
-          status: 'aktiv'
+          Name: 'tomi Bangsat',
+          birthplace: 'agungskak22@gmail.com',
+          birthday: '10 Desember 2019'
         }
       ]
-    },
-    getColor (status) {
-      if (status === 'tidak aktiv') return 'red'
-      else if (status === 'aktiv') return 'green'
     },
 
     editItem (item) {
