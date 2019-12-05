@@ -5,15 +5,46 @@
         <v-toolbar-title>Tambah Data Hewan</v-toolbar-title>
         <v-spacer />
       </v-toolbar>
-      <v-container></v-container>
+      <v-container>
+        <div class='form'>
+          <div v-for='(hewan, index) in arrayHewan' :key='index'>
+            <v-container>
+              <v-row>
+                <v-col cols='12' sm='6' md='3'>
+                  <v-text-field
+                    label='ID Hewan'
+                    name='title'
+                    prepend-icon='mdi-clipboard-account-outline'
+                    type='text'
+                    v-model='hewan.name'
+                  />
+                </v-col>
+                <v-col cols='12' sm='6' md>
+                  <v-text-field label='Bobot' prepend-icon='mdi-lock' v-model='hewan.bobot'></v-text-field>
+                </v-col>
+                <v-col cols='12' sm='6' md='3'>
+                  <v-select :items='hewan.jenisKelamin' label='Jenis Kelamin'></v-select>
+                </v-col>
+                <v-col cols='12' sm='6' md='3'>
+                  <v-select :items='hewan.jenisTernak' label='Jenis Ternak'></v-select>
+                </v-col>
+                <v-col class="text-right" cols='12' sm='12' md='12'>
+                  <v-btn
+                    class='red darken-1'
+                    elevation='1'
+                    dark
+                    v-if='canRemove'
+                    v-on:click='removeTernak(index)'
+                  >Hapus</v-btn>
+                </v-col>
+              </v-row>
+            </v-container>
+          </div>
+        </div>
+      </v-container>
       <v-card-actions>
         <v-spacer />
-        <v-btn
-          color='amber'
-          @click='$router.push({ name: "animal-management" })'
-          dark
-          elevation='0'
-        >{{ btnName }}</v-btn>
+        <v-btn color='amber' v-on:click='addHewan' dark elevation='0'>{{ btnName }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-col>
