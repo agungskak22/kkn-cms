@@ -18,7 +18,7 @@
         <v-list>
           <v-list-item>
             <v-list-item-title>
-              <v-btn @click="doLogout">
+              <v-btn @click="doLogout()">
                 Keluar
               </v-btn>
           </v-list-item-title>
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import store from '../store'
 
 export default {
   props: {
@@ -84,22 +84,22 @@ export default {
         icon: 'mdi-azure',
         text: 'Pengelolaan rumah',
         to: 'products'
-      },
-      {
-        id: 4,
-        icon: 'mdi-azure',
-        text: 'Data Ternak',
-        to: 'products'
       }
     ]
   }),
   methods: {
-    ...mapActions({
-      mapLogout: 'User/doLogout'
-    }),
+    // getData(){
+    //   let config = {
+    //     headers: {
+    //       Authorization: 'Bearer ' + localStorage.getItem('token')
+    //     }
+    //   }
+    // },
     doLogout () {
-      this.mapLogout()
+      localStorage.removeItem('token')
+      store.commit('logoutUser')
       this.$router.push({ name: 'login' })
+      console.log('token')
     }
   }
 }

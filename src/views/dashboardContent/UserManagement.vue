@@ -19,40 +19,9 @@
         class="hidden-sm-and-down"
       ></v-text-field>
       <v-spacer></v-spacer>
-
-      <v-dialog v-model='dialog' max-width='500px'>
-          <template v-slot:activator='{ on }'>
-            <v-btn icon>
-              <v-icon v-on='on'>mdi-plus-circle</v-icon>
-            </v-btn>
-          </template>
-          <v-card>
-            <v-card-title>
-              <span class='headline'>{{ formTitle }}</span>
-            </v-card-title>
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols='12' sm='6' md='4'>
-                    <v-text-field v-model='editedItem.name' label='Name'></v-text-field>
-                  </v-col>
-                  <v-col cols='12' sm='6' md='4'>
-                    <v-text-field v-model='editedItem.email' label='email'></v-text-field>
-                  </v-col>
-                  <v-col cols='12' sm='6' md='4'>
-                    <v-text-field v-model='editedItem.password' label='password'></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color='blue darken-1' text @click='close'>Cancel</v-btn>
-              <v-btn color='blue darken-1' text @click='save'>Save</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+      <v-btn icon @click="$router.push({ name: 'create-user' })">
+        <v-icon>mdi-plus-circle</v-icon>
+      </v-btn>
     </v-toolbar>
   <v-data-table :search="search" :headers='headers' :items='userData' sort-by='email' class='elevation-1'>
     <template v-slot:item.status="{ item }">
@@ -69,6 +38,7 @@
 </template>
 
 <script>
+
 export default {
   data: () => ({
     dialog: false,
@@ -119,18 +89,6 @@ export default {
       this.userData = [
         {
           name: 'Agung Prio Rismawan',
-          email: 'agungskak22@gmail.com',
-          password: 'password',
-          status: 'aktiv'
-        },
-        {
-          name: 'tomi rafael',
-          email: 'agungskak22@gmail.com',
-          password: 'password',
-          status: 'tidak aktiv'
-        },
-        {
-          name: 'tomi Bangsat',
           email: 'agungskak22@gmail.com',
           password: 'password',
           status: 'aktiv'
