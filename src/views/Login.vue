@@ -23,6 +23,7 @@
                     v-model='form.password'
                     prepend-icon='fa fa-lock'
                     type='password'
+                    v-on:keyup.enter="login()"
                   ></v-text-field>
                 </v-form>
               </v-card-text>

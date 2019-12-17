@@ -52,6 +52,20 @@
         Close
       </v-btn>
     </v-snackbar>
+    <v-snackbar
+      v-model="snackbarStateErr.snackbar"
+      :timeout="snackbarStateErr.timeout"
+      color="red"
+    >
+      {{ snackbarStateErr.msg }}
+      <v-btn
+        color="blue"
+        text
+        @click="snackbarState.snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-col>
 </template>
 
@@ -70,6 +84,11 @@ export default {
       snackbar: false,
       msg: 'berhasil Menambahkan',
       timeout: 2000
+    },
+    snackbarStateErr: {
+      snackbar: false,
+      msg: 'Gagal Menambahkan Penguna',
+      timeout: 2000
     }
   }),
   methods: {
@@ -80,7 +99,7 @@ export default {
           this.snackbarState.snackbar = true
           this.$router.push({ name: 'users' })
         } else {
-          alert('error')
+          this.snackbarStateErr = true
         }
       })
     }
